@@ -5,10 +5,9 @@
 \usepackage{common}
 \usepackage{courses}
 
-\title[Gradle 101]{Gradle 101}
+\title[Gradle 101]{Build Automation 101}
 %
-\subtitle[SD]
-{Distributed Systems / Technologies\\\scriptsize Sistemi Distribuiti / Tecnologie}
+\subtitle[SD]{Distributed Systems / Technologies\\\scriptsize Sistemi Distribuiti / Tecnologie}
 %
 \author[Ciatto \and Omicini]
 {\emph{Giovanni Ciatto} \and Andrea Omicini\\
@@ -17,18 +16,18 @@
 \institute[DISI, Univ. Bologna]
 {Dipartimento di Informatica -- Scienza e Ingegneria (DISI)\\\textsc{Alma Mater Studiorum} -- Universit{\`a} di Bologna a Cesena}
 %
-\date[A.Y. 2019/2020]{Academic Year 2019/2020}
+\date[A.Y. 2020/2021]{Academic Year 2020/2021}
 
 \setbeamercovered{transparent}
 
-% \AtBeginSection[]
-% {
-% 	\begin{frame}[c]\frametitle{Next in Line\ldots}
-% 		\begin{multicols}{2}
-% 			\tableofcontents[sectionstyle=show/shaded, subsectionstyle=show/hide, subsubsectionstyle=hide/hide]
-% 		\end{multicols}
-% 	\end{frame}
-% }
+\AtBeginSection[]
+{
+\begin{frame}[c]\frametitle{Next in Line\ldots}
+%    \begin{multicols}{2}
+        \tableofcontents[sectionstyle=show/shaded, subsectionstyle=show/hide, subsubsectionstyle=hide/hide]
+%    \end{multicols}
+\end{frame}
+}
 
 \begin{document}
 
@@ -44,55 +43,55 @@
 
 \begin{frame}
 \frametitle{Motivation}
-    
+
     \begin{itemize}
         \item Applications -- especially distributed ones -- are made up of several \alert{components} which eventually need to be \alert{deployed} one or more machines---possibly in an orderly fashion
-        
+
         \vfill{}
-        
+
         \item In projects/exercises, you may need to write, compile, \alert{deploy}, \& start several processes in a given \alert{order}, possibly multiple \alert{times}
-        
+
         \vfill{}
-        
+
         \item This process is mechanic, error-prone, and IDE-dependent---other than boring and time consuming
-        
+
         \vfill{}
-        
-        \item We will thus extensively leverage Gradle in our lab activities (and in your projects) to automate most low level operations 
+
+        \item We will thus extensively leverage Gradle in our lab activities (and in your projects) to automate most low level operations
         %
         \begin{itemize}
             \item in an IDE-independent way
         \end{itemize}
-        
+
     \end{itemize}
-    
+
 \end{frame}
-    
+
 % \begin{frame}
 % \frametitle{Lecture goals II}
-    
+
 %     \begin{itemize}
 %         \item<1> In this course, you may need a way to reproduce Lab exercises on your personal computers, possibly simulating a distributed environment
-        
+
 %         \vfill{}
-        
+
 %         \item<2> Furthermore, you must be able to submit your homeworks/projects being sure they will run on other computer too
 %         \begin{itemize}
 %             \item<2> Avoiding the situation \emph{``No, I swear, it used to work on my PC''} :)
-            
+
 %             \item<2>[!] Making your results more durable and \alert{reproducible}
 %         \end{itemize}
-        
+
 %         \vfill{}
-        
+
 %         \item<3>[$\rightarrow$] You will learn some fundamentals of:
 %         \begin{itemize}
 %             \item<3> Build \& automation systems (e.g. \href{https://gradle.org/}{Gradle})
 %             \item<3> Container Engines (e.g. \href{https://www.docker.com/}{Docker})
 %         \end{itemize}
-        
+
 %         \vfill{}
-        
+
 %         \item<4> Because of Lab-0, you are assumed to:
 %         \begin{itemize}
 %             \item<4> have properly installed Gradle and Docker on your personal PC
@@ -109,13 +108,13 @@
     \pause %
     \begin{multicols}{2}
     \begin{itemize}
-        \item Dependencies provisioning \& versioning 
+        \item Dependencies provisioning \& versioning
         \pause
-        \item Testing 
+        \item Testing
         \pause
-        \item \alert{Compilation} 
+        \item \alert{Compilation}
         \pause
-        \item Execution 
+        \item Execution
         \pause
         \item Artefact (e.g. \texttt{.jar} files) generation
         \pause
@@ -123,24 +122,24 @@
     \end{itemize}
     \end{multicols}
     %
-    just to cite some. 
-    
+    just to cite some.
+
     \vspace{.5cm}\pause
-    
+
     \begin{itemize}
-        
+
         \item Remember all the time spent configuring somebody else's Eclipse project?
         \begin{itemize}
             \item we are targeting that problem
         \end{itemize}
-        
+
         \pause
-        
+
         \item[!] Plus, Build \& Automation systems are very handy when combined with Containers, e.g. for Continuous Integration
-        
+
     \end{itemize}
-    
-    
+
+
 \end{frame}
 
 \subsection{Why Build \& Automation systems}
@@ -153,13 +152,13 @@
         \item compilation
         \item launch by command line
     \end{itemize}
-    
+
     \vspace{.5cm}\pause
-    
+
     (Of course, alternatives exist for other platforms)
-    
+
     \vspace{.5cm}\pause
-    
+
     \begin{block}{}
         \alert{From now on} your Java-based projects \emph{should} be submitted as self-contained Gradle projects
     \end{block}
@@ -180,9 +179,9 @@
         \item<4> The App dependencies are just \alert{declared} into a \alert{\texttt{build.gradle}} file, along with their versions
         \begin{itemize}
             \item<4> no \texttt{.jar} file must be provided, in the general case
-        \end{itemize} 
+        \end{itemize}
     \end{itemize}
-    
+
 \end{frame}
 
 \begin{frame}
@@ -194,7 +193,7 @@
             \item<1-8>[] or
             \item<1-8>[$>$] \texttt{\alert{.$\backslash$}gradlew \alert{<task>}} \quad (on Windows)
         \end{itemize}
-        
+
         \item<2-7> The set of available tasks (for Java Apps) includes, among the others:
         %
         \begin{description}
@@ -204,8 +203,8 @@
             \item<6>[\texttt{run}] | runs the application
             \item<7>[\texttt{tasks}] | shows a list of available tasks
         \end{description}
-        
-        \item<8> Dependencies between are as follows: 
+
+        \item<8> Dependencies between are as follows:
         \begin{itemize}
             \item<8> \texttt{run} $\rightarrow$ \texttt{build} $\rightarrow$ \texttt{check} $\rightarrow$ \texttt{assemble}
             \item<8> so if you try to run an unassembled application, it will be firstly \emph{(i)} assembled, then \emph{(ii)} checked, then \emph{(iii)} built, and finally \emph{(iv)} run
@@ -220,7 +219,7 @@
 \frametitle{Canonical directory structure}
 
     % \lstinputlisting[language=]{./res/src/dir_structure}
-    
+
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{blue}{my-project/}\dhint{The project root directory, named after it}
 ├── \textcolor{green}{gradlew}\dhint{The \emph{Gradle Wrapper} script, for Unix}
@@ -258,20 +257,20 @@
                 \item[]
                 \item[] (Works on both Unix and Windows)
             \end{itemize}
-            \item The directory structure shown on the right should have been created 
-            
+            \item The directory structure shown on the right should have been created
+
         \end{enumerate}
     }{
         \includegraphics[width=\linewidth]{res/img/gradle_tree.png}
     }
-    
+
     \framebreak
-    
+
     \begin{enumerate}\setcounter{enumi}{3}
-        \item Prefer \alert{Kotlin} as a build script DSL, and \alert{JUnit} as test framework 
-    
+        \item Prefer \alert{Kotlin} as a build script DSL, and \alert{JUnit} as test framework
+
         \item Look for the generated files structure, and in particular the \texttt{App.java} file
-        
+
         \item Run the application by typing:
         \begin{itemize}
             \item[\$] \texttt{./gradlew run}
@@ -285,14 +284,14 @@
             \item[] on Unix, or, in case of Windows:
             \item[$>$] \texttt{.$\backslash$gradlew \alert{--no-daemon --console=plain} run}
         \end{itemize}
-        
+
         \vspace{.3cm}
-        
+
         \item Can you spot the differences?
     \end{enumerate}
-        
+
     \framebreak
-    
+
     \begin{enumerate}\setcounter{enumi}{8}
         \item Now look at the \texttt{\alert{build.gradle.kts}} file
         \begin{itemize}
@@ -300,23 +299,23 @@
         \end{itemize}
     \end{enumerate}
     \lstinputlisting{./res/src/build.gradle.kts}
-    
+
     Dependencies -- i.e., artefacts at a specific version -- can be added by appending lines in the following form to the \texttt{dependencies} section
     %
     \begin{center}
         \texttt{implementation "<gropuId>}\alert{:}\texttt{<artifactId>}\alert{:}\texttt{<version>"}
     \end{center}
-    
+
     \framebreak
-    
+
     Artefacts -- along with their \texttt{groupId}, \texttt{artifactID} and \texttt{version} -- can be found on central repositories such as \href{https://search.maven.org/}{Maven Central Repository} or \href{https://bintray.com/bintray/jcenter}{JCenter}
     %
     \begin{center}
         \includegraphics[width=.7\linewidth]{./res/img/mcr.png}
-        
+
         {\scriptsize\url{https://search.maven.org/artifact/com.google.guava/guava/23.0/bundle}}
     \end{center}
-    
+
 \end{frame}
 
 \subsubsection{Gradle properties}
@@ -324,11 +323,11 @@
 \begin{frame}[allowframebreaks]
 \frametitle{Gradle properties -- Try it your self}
     \begin{enumerate}
-    
+
         \item Try editing the \texttt{App.java} program in such a way it accepts some arguments, like for instance:
         %
         \lstinputlisting{./res/src/App.java}
-        
+
         \item Try running it with
         \begin{itemize}
             \item[\$] \texttt{./gradlew run}
@@ -342,14 +341,14 @@
     \begin{itemize}
         \item[!] How to pass arguments to a Gradle task?
     \end{itemize}
-    
+
     \framebreak
-    
+
     \begin{enumerate}\setcounter{enumi}{2}
         \item Let's redefine the \texttt{run} task by \alert{adding} the following section to the \texttt{build.gradle} file: \hint{help for backtick \href{https://stefanonegro.it/2013/04/15/backtick-e-tilde-con-una-tastiera-italiana}{here}}
         %
         \lstinputlisting{./res/src/run.task.kts}
-        
+
         \item Try running it again, with:
         \begin{itemize}
             \item[\$] \texttt{./gradlew run} or \alert{$>$} \texttt{.$\backslash$gradlew run}
@@ -375,11 +374,11 @@
             \alert{\$} \texttt{./gradlew run -P}\alert{\texttt{key1}}\texttt{=}\alert{\texttt{value1}} \texttt{-P}\alert{\texttt{key2}}\texttt{=}\alert{\texttt{value2}} \texttt{...}
         \end{block}
     }
-    
+
     \begin{enumerate}\setcounter{enumi}{4}
         \item Try making the \texttt{App.java} program print \texttt{"Hello, <your name>!"}
     \end{enumerate}
-    
+
 \end{frame}
 
 \section*{}
@@ -404,8 +403,8 @@
 %         \item<5> Containers are instances of some \alert{image}
 %         \item<6> Images are serialisable and versioned and they are usually shared by means of public \alert{repositories}
 %     \end{itemize}
-    
-    
+
+
 % \end{frame}
 
 % \subsection{Why containers}
@@ -422,11 +421,11 @@
 %         \pause
 %         \item Containers are the building blocks of \alert{stacks}, which in turn are managed by \alert{orchestrators}, to deploy (\alert{micro})\alert{services}.
 %         This is what happens, for instance, behind the scenes of a \alert{Cloud} provider
-        
+
 %     \end{itemize}
-    
+
 %     \vspace{.3cm}\pause
-    
+
 %     \begin{block}{}
 %         \alert{From now on}, you are \alert{encouraged} to use containers to submit your projects
 %     \end{block}
@@ -467,9 +466,9 @@
 % 	\item<2-> Usually, you do not manipulate images directly: your local Docker installation takes care of pulling/pushing them from/to an online \alert{repository} for you:
 % 	%
 % 	\begin{itemize}
-% 		\item<2->[\$] \texttt{docker image} \texttt{\alert{<cmd>}} 
+% 		\item<2->[\$] \texttt{docker image} \texttt{\alert{<cmd>}}
 % 	\end{itemize}
-% 	% 
+% 	%
 % 	where \texttt{<cmd>} may be one of the following:
 % 	%
 % 	\begin{description}
@@ -480,9 +479,9 @@
 % 		\item<7>[\texttt{rm}] | remove one or more images
 % 		\item<8>[\texttt{tag}] | creates a symbolic tag for an image
 % 		\item<9>[\texttt{--help}] | shows the list of available commands for images
-		
+
 % 	\end{description}
-	
+
 % \end{itemize}
 
 % \end{frame}
@@ -494,25 +493,25 @@
 % 		\begin{itemize}
 % 		    \item<1>[\$] \texttt{docker image \alert{ls}}
 % 		\end{itemize}
-		
+
 % 		\item<2-4> Download (or \alert{pull}) the \href{https://hub.docker.com/_/alpine/}{\texttt{alpine}} image from the Internet
 % 		\begin{itemize}
-% 		    \item<2-4>[\$] \texttt{docker [image] \alert{pull} \textit{alpine}} 
+% 		    \item<2-4>[\$] \texttt{docker [image] \alert{pull} \textit{alpine}}
 % 		    \item<2-4>[] \hint{\texttt{[optional\_term] within square brackets}}
 % 		    \item<3-4> Where is the image being downloaded from?
 % 		    \begin{itemize}
-% 		        \item<3-4> The default registry from \url{https://hub.docker.com}, you are assumed to have an account on there 
+% 		        \item<3-4> The default registry from \url{https://hub.docker.com}, you are assumed to have an account on there
 % 		        \item<3-4> thus, you own a repository too \texttt{https://hub.docker.com/u/\alert{<your\_username>}}
 % 		    \end{itemize}
 % 		    \item<4> What's \texttt{alpine}?
 % 		    \begin{itemize}
-% 		        \item<4> Alpine Linux\footnote{\url{https://alpinelinux.org/about}} is one of the most lightweight Linux distribution ever 
+% 		        \item<4> Alpine Linux\footnote{\url{https://alpinelinux.org/about}} is one of the most lightweight Linux distribution ever
 % 		    \end{itemize}
 % 		\end{itemize}
-		
+
 % 		\item<5> Re-check the currently available images
 % 		\begin{itemize}
-% 		    \item<5>[\$] \texttt{docker image \alert{ls}} 
+% 		    \item<5>[\$] \texttt{docker image \alert{ls}}
 % 	    \end{itemize}
 % 	\end{enumerate}
 % \end{frame}
@@ -526,15 +525,15 @@
 %         \item<1-> Docker containers can be instantiated by means of the following syntax:
 %         %
 %         \begin{itemize}
-%             \item<1->[\$] \texttt{docker [container] \alert{run} [\alert{<opts>}] \alert{\textit{<image>}} [\alert{<cmd>} [\textit{\alert{<args>}}]]} 
+%             \item<1->[\$] \texttt{docker [container] \alert{run} [\alert{<opts>}] \alert{\textit{<image>}} [\alert{<cmd>} [\textit{\alert{<args>}}]]}
 %         \end{itemize}
 %         %
 %         where :
-%         \begin{description}     
+%         \begin{description}
 %             \item<2>[\texttt{\textit{<image>}}] is the image to be instantiated,
 %             \item<3>[\texttt{<cmd>}] is the command to be executed on the container, once instantiated (optional)
 %             \item<4>[\texttt{\textit{<args>}}] is a sequence of space-separated arguments for \texttt{<cmd>}
-%             \item<5>[\texttt{<opts>}] is a possibly empty sequence of options for the container instantiation. Several are available. 
+%             \item<5>[\texttt{<opts>}] is a possibly empty sequence of options for the container instantiation. Several are available.
 %         \end{description}
 %         %
 %     \end{itemize}
@@ -547,42 +546,42 @@
 %         %
 %         \begin{description}
 %             \item<2>[\texttt{-i}] | runs the container in \emph{\alert{i}nteractive} mode
-            
+
 %             \item<3>[\texttt{-t}] | runs the container in \emph{\alert{t}erminal} emulation mode
-            
+
 %             \item<4>[\texttt{-d}] | runs the container in \emph{\alert{d}aemon} mode \hint{daemons = services}
-            
+
 %             \item<5>[\texttt{-e \textit{<key>}=<value>}] | sets an \emph{\alert{e}nvironment} variable \texttt{\textit{<key>}} to \texttt{<value>} on the container, before \texttt{<cmd>} is invoked
-            
+
 %             \item<6>[\texttt{-p \textit{<host>}:<guest>}] | \emph{\alert{p}ublish} port \texttt{<guest>} on the container to port \texttt{\textit{<host>}} on the host
 %             % \item[\texttt{-h \textit{<hostname>}}]  |  sets the \emph{\alert{h}ostname} of the container to \texttt{\textit{<hostname>}}
-            
+
 %             \item<7>[\texttt{--name \textit{<name>}}]  |  assigns a unique \emph{\alert{n}ame} to the container
 %         \end{description}
-        
+
 %     \end{itemize}
 % \end{frame}
 
 % \begin{frame}
 % \frametitle{Docker Containers III}
 %     \begin{itemize}
-        
+
 %         \item As soon as \texttt{<cmd>} terminates its execution, the container is teminated too and any side effect applied to its storage is reverted
-        
+
 %         \pause
-        
+
 %         \item If your application (\texttt{<cmd>}) requires NO user interaction and it CAN just run in the background, you must run it in daemon mode, otherwise in interactive mode
-        
+
 %         \pause
-        
+
 %         \item In interactive mode, the application's \texttt{stdin}, \texttt{stdout}, \texttt{stderr} are redirected to/from your console
 %         %
 %         \begin{itemize}
 %             \item this is necessary if the containerised applicationion need to consume the users' inputs
 %         \end{itemize}
-        
+
 %         \pause
-        
+
 %         \item If you need to interact with some container's shell, you should run it in terminal emulation mode
 %     \end{itemize}
 
@@ -608,7 +607,7 @@
 %             \item[\$] \texttt{cd ; whoami ; pwd ; hostname ; echo \$MY\_MSG}
 %         \end{itemize}
 %         %
-%         \item Cool. What else can a raw Alpine Linux do? Is even Java installed? 
+%         \item Cool. What else can a raw Alpine Linux do? Is even Java installed?
 %         %
 %         \begin{itemize}
 %             \item[\$] \texttt{java -version ; javac -version}
@@ -620,9 +619,9 @@
 %             \item[\$] \texttt{apk update ; apk add openjdk8} \hint{\href{https://wiki.alpinelinux.org/wiki/Alpine_Linux_package_management}{APK doc here}}
 %             \item[\$] \texttt{java -version ; javac -version}
 %         \end{itemize}
-        
+
 %         \framebreak
-        
+
 %         \item Try now to gracefully terminate the shell
 %         %
 %         \begin{itemize}
@@ -631,7 +630,7 @@
 %                 \item the process launched by \texttt{docker run} terminated, so the container will be terminated too
 %             \end{itemize}
 %         \end{itemize}
-        
+
 %         \item Re-run the same shell in terminal emulation mode
 %         %
 %         \begin{itemize}
@@ -640,14 +639,14 @@
 %                 \item Can you see the effect of option \texttt{-t}?
 %             \end{itemize}
 %         \end{itemize}
-        
+
 %         \item Re-check whether Java is installed or not
 %         \begin{itemize}
 %             \item what do you expect?
 %         \end{itemize}
-        
+
 %         \framebreak
-        
+
 %         \item \alert{Before terminating this second container}, open another shell \alert{on the host} and run
 %         %
 %         \begin{itemize}
@@ -657,7 +656,7 @@
 %                 \item you should be able to spot a line representing your container's info---there including a funny auto-generated name
 %             \end{itemize}
 %         \end{itemize}
-        
+
 %         \item Try now to check for non-running containers too
 %         %
 %         \begin{itemize}
@@ -666,7 +665,7 @@
 %                 \item can you spot the previous container, the one you installed Java in?
 %             \end{itemize}
 %         \end{itemize}
-        
+
 %         \item Terminate all containers, gracefully and then delete them all by running
 %         %
 %         \begin{itemize}
@@ -675,7 +674,7 @@
 %                 \item now your environment is clean
 %             \end{itemize}
 %         \end{itemize}
-        
+
 %     \end{enumerate}
 
 % \end{frame}
@@ -699,9 +698,9 @@
 %         \item Some \alert{ENV}ironment variable may be optionally set
 %         \item Some transport-level port may be optionally \alert{EXPOSE} to the host or to the other containers
 %         \item Some default \alert{CMD} may optionally be configured to be invoke by default upon container start
-         
+
 %     \end{enumerate}
-    
+
 % \end{frame}
 
 % \begin{frame}[allowframebreaks]
@@ -711,15 +710,15 @@
 %         \item Edit the \texttt{App.java} form the Gradle example as follows:
 %         %
 %         \lstinputlisting{./res/src/App1.java}
-        
+
 %         \framebreak
 
 %         \item Create a new file named \alert{\texttt{Dockerfile}} withing the project root directory \alert{\texttt{my-app}}, containing the following lines:
 %         %
-%         \lstinputlisting[language=docker]{./res/src/Dockerfile1} 
-        
+%         \lstinputlisting[language=docker]{./res/src/Dockerfile1}
+
 %         \framebreak
-        
+
 %         \item Build the new image by executing the following command:
 %         %
 %         \begin{itemize}
@@ -729,36 +728,36 @@
 %                 \item and \alert{\texttt{<DockerID>/my-app}} is a \alert{tag} for the newly created image
 %             \end{itemize}
 %         \end{itemize}
-        
+
 %         \item Now have a look to the list of available images on your computer
 %         %
 %         \begin{itemize}
 %             \item[\$] \texttt{docker image ls}
 %         \end{itemize}
-        
-%         \item Can you spot the new entry? You can instantiate it as a \alert{named} container by typing 
+
+%         \item Can you spot the new entry? You can instantiate it as a \alert{named} container by typing
 %         %
 %         \begin{itemize}
 %             \item[\$] \texttt{docker run -t -i \alert{--name my-app} <DockerID>/my-app}
 %         \end{itemize}
-        
+
 %         \item Run the app until it terminates. Can you understand how inputs can be provided to containerised applications?
-        
+
 %         \framebreak
-        
+
 %         \item From now on, you can re-run the app by typing
 %         %
 %         \begin{itemize}
 %             \item[\$] \texttt{docker [container] \alert{start} -i -a my-app}
 %         \end{itemize}
-        
+
 %         \item Since you own an account on \href{https://hub.docker.com/}{DockerHub}, and your local Docker is properly \emph{logged in}, you can now \alert{push} your newly created image by typing
 %         %
 %         \begin{itemize}
 %             \item[\$] \texttt{docker [image] \alert{push} <DockerID>/my-app}
 %         \end{itemize}
-        
-%         \item Now everybody can \alert{pull} your image for using it. You can try with your colleagues ones by typing 
+
+%         \item Now everybody can \alert{pull} your image for using it. You can try with your colleagues ones by typing
 %         %
 %         \begin{itemize}
 %             \item[\$] \texttt{docker [image] \alert{pull} <Colleague-DockerID>/my-app}
@@ -766,9 +765,9 @@
 %                 \item What a great way to distribute software! :)
 %             \end{itemize}
 %         \end{itemize}
-         
+
 %     \end{enumerate}
-    
+
 
 % \end{frame}
 
@@ -778,18 +777,18 @@
 
 % \begin{frame}[allowframebreaks]
 % \frametitle{Exercise 2-1: Java Echo application}
-    
+
 %     \begin{enumerate}
-%         \item Clone the Lab-2 GitLab repository at \url{https://gitlab.com/das-lab/courses/ds/aa1819/lab-2} 
+%         \item Clone the Lab-2 GitLab repository at \url{https://gitlab.com/das-lab/courses/ds/aa1819/lab-2}
 %         %
 %         \begin{itemize}
 %             \item it stores the Java Echo application within the \texttt{jecho} directory
 %             \item which is a simple project: bare Java sources
 %             \item the \texttt{im} directory is for the next exercise
 %         \end{itemize}
-        
+
 %         \vspace{.5cm}
-        
+
 %         \item Inspect the Java Echo application source code and try to figure out its functioning
 %         %
 %         \begin{itemize}
@@ -798,9 +797,9 @@
 %             \item which assumptions (about the environment) does it relies upon?
 %             \item[!] notice that the application requires network communication to occur on port 8080
 %         \end{itemize}
-        
+
 %         \framebreak
-        
+
 %         \item Gradlefy the cloned application, making it compilable and runnable by means of \texttt{gradlew}
 %         %
 %         \begin{itemize}
@@ -809,18 +808,18 @@
 %             \begin{itemize}
 %                 \item[\$] \texttt{gradle wrapper}\hint{\href{https://docs.gradle.org/current/userguide/gradle_wrapper.html}{see Reference here}}
 %             \end{itemize}
-            
-            
+
+
 %             \item other files must be created manually :)
-            
+
 %             \item the canonical directory structure must be created manually :))
-            
+
 %             \item use \alert{environment variables} or Gradle properties to provide arguments to the application
-            
+
 %         \end{itemize}
-        
+
 %         \vspace{.5cm}
-        
+
 %         \item Dockerify the cloned application, creating an image out of it
 %         %
 %         \begin{itemize}
@@ -829,39 +828,39 @@
 %             \begin{itemize}
 %                 \item you may need to actually create two images, one for each mode
 %             \end{itemize}
-        
+
 %             \item remember to \alert{expose} the 8080 port! \hint{\href{https://docs.docker.com/engine/reference/builder/\#expose}{Reference here}}
-            
+
 %             \item remember to tag the images with the \texttt{\textit{<DockerID>}/jecho-daemon} and \texttt{\textit{<DockerID>}/jecho-gate} tags
 %         \end{itemize}
-        
+
 %         \framebreak
-        
+
 %         \item Run the newly created images as containers, named \texttt{jecho-d} and \texttt{jecho-g} respectively
 %         %
 %         \begin{itemize}
 %             \item in case of \texttt{jecho-d}, remember to \alert{publish} the container's 8080 port on the host's 8888 port \hint{\href{https://docs.docker.com/engine/reference/commandline/run/\#options}{Reference here}}
-            
+
 %             \item in case of \texttt{jecho-g}, it need to be provided with the IP of \texttt{jecho-d}
-            
+
 %             \item you can \alert{inspect} a container in order to find its IP:
 %             %
 %             \begin{itemize}
 %                 \item[\$] \texttt{docker container \alert{inspect} jecho-d} \hint{\href{https://docs.docker.com/engine/reference/commandline/container_inspect/}{Reference here}}
 %             \end{itemize}
-            
+
 %         \end{itemize}
-        
+
 %         \vspace{.5cm}
-        
+
 %         \item Try interacting with \texttt{jecho-d}, both from the host and from \texttt{jecho-g}
-        
+
 %         \vspace{.5cm}
-        
+
 %         \item Describe your tests into the \texttt{README.md} file
 %     \end{enumerate}
-    
-    
+
+
 % \end{frame}
 
 % \subsection{IM application}
@@ -877,23 +876,23 @@
 %             \item store the source code within the \texttt{im} directory
 %             \item you can use the provided solution to the Lab-1 exercise, if you didn't completed it
 %         \end{itemize}
-        
+
 %         \item Dockerify it
-        
+
 %         \item Instantiate at least 2 containers, each one wrapping an instance of the IM application
 %         %
 %         \begin{itemize}
 %             \item inter-connect them by means of containers' IPs
 %         \end{itemize}
-        
+
 %         \item Use 2 disjoint consoles to emulate a multi-IM scenario
-        
+
 %         \item Describe your tests into the \texttt{README.md} file
-        
+
 %         \vspace{1cm}
-        
-        
-        
+
+
+
 %         \item[!] Congrats! You are emulating a distributed system on your local PC! :)
 %     \end{enumerate}
 
