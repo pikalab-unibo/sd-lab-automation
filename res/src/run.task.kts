@@ -6,7 +6,7 @@ tasks.named<JavaExec>("run") {
   // Set the application stdin to Gradle's stdin
   standardInput = System.`in`
   // Set the application classpath
-  sourceSets.main { classpath = runtimeClasspath } 
+  sourceSets.main { classpath = runtimeClasspath }
   // Checks whether a property with key "username" exists
   if (rootProject.hasProperty("username"))
     // in case, appends its value to the application arguments

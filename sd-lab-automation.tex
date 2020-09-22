@@ -1,10 +1,8 @@
 % !TeX spellcheck = en_GB
 \documentclass{beamer}\mode<presentation>{\usetheme{AMSCesenaPurpleAndGold}}
-% \documentclass[presentation]{beamer}\mode<presentation>{\usetheme{AMSCesenaBleu}}
-%%%%
+\setbeamertemplate{bibliography item}{\insertbiblabel}
 
 \usepackage{common}
-\usepackage{courses}
 
 \title[Gradle 101]{Build Automation 101}
 %
@@ -371,7 +369,7 @@
         \end{itemize}
     \end{enumerate}
     %
-    \lstinputlisting{./res/src/build.gradle.kts}
+    \lstinputlisting[language=Java]{./res/src/build.gradle.kts}
 
 \end{frame}
 
@@ -424,7 +422,7 @@
 
         \item Try editing the \texttt{App.java} program in such a way it accepts some arguments, like for instance:
         %
-        \lstinputlisting{./res/src/App.java}
+        \lstinputlisting[language=Java]{./res/src/App.java}
 
         \item Try running it with
         \begin{itemize}
@@ -445,7 +443,7 @@
     \begin{enumerate}\setcounter{enumi}{2}
         \item Let's redefine the \texttt{run} task by \alert{adding} the following section to the \texttt{build.gradle} file: \hint{help for backtick \href{https://stefanonegro.it/2013/04/15/backtick-e-tilde-con-una-tastiera-italiana}{here}}
         %
-        \lstinputlisting{./res/src/run.task.kts}
+        \lstinputlisting[language=Java]{./res/src/run.task.kts}
 
         \item Try running it again, with:
         \begin{itemize}
@@ -479,7 +477,7 @@
 
 \end{frame}
 
-\section*{}
+\section{Exercises}
 
 \begin{frame}[c]{The end}\centering
     This is sufficient for the moment =)
