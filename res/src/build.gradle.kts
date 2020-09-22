@@ -15,13 +15,13 @@ repositories {
 
 application {
     // Define the main class for the application
-    mainClassName = "my.app.App"
+    mainClassName = "it.unibo.my.app.App"
 }
 
 dependencies {
     // This dependency is found on compile classpath of this component and consumers.
-    implementation("com.google.guava:guava:27.0.1-jre")
+    implementation("com.google.guava:guava:29.0-jre")
 
     // Use JUnit test framework
-    testImplementation("junit:junit:4.12")
+    testImplementation("junit:junit:4.13")
 }
