@@ -4,7 +4,9 @@
 
 \usepackage{common}
 
-\title[Gradle 101]{Build Automation 101}
+\newcommand{\labN}{1}
+
+\title[L\labN{} -- Build Automation 101]{L\labN{} -- Build Automation 101}
 %
 \subtitle[SD]{Distributed Systems / Technologies}
 %
@@ -124,10 +126,12 @@
 
 % \end{frame}
 
-\section{Build \& Automation systems}
+\section{Build Automation Systems}
 
-\begin{frame}{Build \& Automation systems}
-    Build \& Automation systems \alert{automate} several sub-tasks of the SW developing \& engineering process, like for instance:
+\subsection{Overview}
+
+\begin{frame}{Build Automation Systems}
+    Build automation systems \alert{automate} several sub-tasks of the SW developing \& engineering process, like for instance:
     %
     \begin{multicols}{2}
         \begin{itemize}
@@ -163,8 +167,6 @@
             \item we are targeting that problem
         \end{itemize}
 
-        \pause
-
         \item[!] Plus, build automation systems are very handy when combined with Containers, e.g. for Continuous Integration
 
     \end{itemize}
@@ -172,10 +174,10 @@
 
 \end{frame}
 
-\subsection{Why Build \& Automation systems}
+\subsection{Gradle}
 
-\begin{frame}{Why Build \& Automation systems}
-    We will leverage \alert{Gradle} as a Build \& Automation system for JVM-based application in order to automate your exercises/projects:
+\begin{frame}{Why Build Automation systems}
+    We will leverage \alert{Gradle} as a build automation system for JVM-based application in order to automate your exercises/projects:
     %
     \begin{itemize}
         \item dependencies management
@@ -196,21 +198,24 @@
     \end{block}
 \end{frame}
 
-\subsection{Gradle}
-
 \begin{frame}
 \frametitle{Gradle I}
 
-    Gradle is our Build \& Automation of choice
+    Gradle is our build automation of choice
     %
     \vfill
     %
     \begin{itemize}
-        \item It assumes an App project to adhere to a well defined \alert{directory structure}
+        \item It assumes each project to adhere to a well defined \alert{directory structure}
 
         \vfill
 
-        \item A \alert{\texttt{gradlew}} (or \texttt{gradlew.bat}, on Windows system) script is assumed to be present within the project root directory
+        \item A \alert{\texttt{gradlew}} (or \texttt{gradlew.bat}, on Windows systems) script is assumed to be present within the project root directory
+        %
+        \begin{itemize}
+        	\item it is called the \alert{Gradle wrapper}
+        	\item the directory containing it is called the \alert{root of the project}
+        \end{itemize}
 
         \vfill
 
@@ -268,7 +273,7 @@
             \item so if you try to run an unassembled application, it will be
             %
             \begin{itemize}
-                \item firstly \alert{assembled} (i.e., compiles)
+                \item firstly \alert{assembled} (i.e., compiled)
                 \item then \alert{checked} (i.e., tested)
                 \item and finally \alert{run}
             \end{itemize}
@@ -277,10 +282,10 @@
 
 \end{frame}
 
-\subsubsection{Canonical directory structure}
+\subsubsection{Canonical Directory Structure}
 
 \begin{frame}[fragile]
-\frametitle{Canonical directory structure}
+\frametitle{Canonical Directory Structure}
 
     % \lstinputlisting[language=]{./res/src/dir_structure}
 
@@ -305,7 +310,7 @@
 
 \end{frame}
 
-\subsubsection{Gradle tasks \& dependencies}
+\subsubsection{Gradle Tasks \& Dependencies}
 
 \begin{frame}[allowframebreaks]
 \frametitle{Gradle tasks \& dependencies -- Try it your self}
@@ -317,6 +322,8 @@
             \begin{itemize}
                 \item[eg] \alert{\texttt{my-app}}
             \end{itemize}
+        
+        	\medskip
 
             \item Create a directory named after the project and move your shell into it
             %
@@ -327,6 +334,8 @@
                 \item[]
                 \item[] (Works on both Unix and Windows)
             \end{itemize}
+        
+        	\medskip
 
             \item The directory structure shown on the right should have been created
         \end{enumerate}
@@ -339,8 +348,12 @@
     \begin{enumerate}\setcounter{enumi}{3}
         \item Prefer \alert{Kotlin} as a build script DSL, and \alert{JUnit} as test framework
 
+		\medskip
+		
         \item Inspect the generated files structure \& look for the \texttt{App.java} file
 
+		\medskip
+	
         \item Run the application by typing:
         \begin{itemize}
             \item[\$] \texttt{./gradlew run}
@@ -348,6 +361,9 @@
             \item[$>$] \texttt{.$\backslash$gradlew run}
             \item[]
         \end{itemize}
+    	
+    	\medskip
+    
         \item Re-run the application by typing:
         \begin{itemize}
             \item[\$] \texttt{./gradlew \alert{--no-daemon --console=plain} run}
@@ -355,7 +371,7 @@
             \item[$>$] \texttt{.$\backslash$gradlew \alert{--no-daemon --console=plain} run}
         \end{itemize}
 
-        \vspace{.3cm}
+        \medskip
 
         \item Can you spot the differences?
     \end{enumerate}
@@ -414,10 +430,10 @@
 
 \end{frame}
 
-\subsubsection{Gradle properties}
+\subsubsection{Gradle Properties}
 
 \begin{frame}[allowframebreaks]
-\frametitle{Gradle properties -- Try it your self}
+\frametitle{Gradle Properties -- Try it your self}
     \begin{enumerate}
 
         \item Try editing the \texttt{App.java} program in such a way it accepts some arguments, like for instance:
@@ -441,7 +457,7 @@
     \framebreak
 
     \begin{enumerate}\setcounter{enumi}{2}
-        \item Let's redefine the \texttt{run} task by \alert{adding} the following section to the \texttt{build.gradle} file: \hint{help for backtick \href{https://stefanonegro.it/2013/04/15/backtick-e-tilde-con-una-tastiera-italiana}{here}}
+        \item Let's redefine the \texttt{run} task by \alert{adding} the following section to the \texttt{build.gradle.kts} file: \hint{help for backticks \href{https://stefanonegro.it/2013/04/15/backtick-e-tilde-con-una-tastiera-italiana}{here}}
         %
         \lstinputlisting[language=Java]{./res/src/run.task.kts}
 
@@ -479,8 +495,199 @@
 
 \section{Exercises}
 
-\begin{frame}[c]{The end}\centering
-    This is sufficient for the moment =)
+\subsection{Importing Gradle Projects into IDE}
+
+\startExercise
+
+\begin{frame}[c,allowframebreaks]
+	\frametitle{Exercise \currentExercise{} -- Importing Gradle Projects into Eclipse}
+
+	\begin{block}{\textbf{Takeway} -- Preferred setup for Eclipse}
+		\begin{itemize}
+			\item Put your Gradle root project inside a directory, inside the \alert{workspace}
+			\item[eg] \texttt{/path/to/workspace}
+			%
+			\begin{itemize}
+				\item[] \texttt{/path/to/workspace/\alert{my-app}}
+				%
+				\begin{itemize}
+					\item[] \texttt{/path/to/workspace/my-app/\alert{build.gradle.kts}}
+				\end{itemize}
+			\end{itemize}
+		\end{itemize}
+	\end{block}
+
+	\framebreak
+	
+	Activity:
+	%
+	\medskip
+	%
+	\begin{enumerate}
+		\item Move directory \texttt{/path/to/\alert{my-app}} to \texttt{/path/to/\alert{workspace}/my-app}
+		
+		\medskip
+		
+		\item Open Eclipse, choosing \texttt{/path/to/\alert{workspace}} as workspace
+		
+		\medskip
+		
+		\item Click on $File$ and then select $Import$: a wizard should appear
+		%
+		\begin{enumerate}
+			\item select $Gradle / Exsting\ Gradle\ Project$
+			\item click on $Next$ as may times as possible
+			\item click on $Finish$
+		\end{enumerate}
+	
+		\medskip
+		
+		\item The Gradle project should now be correctly imported
+		%
+		\begin{itemize}
+			\item its dependencies should be automatically loaded
+		\end{itemize}
+	
+		\medskip
+	
+		\item Use Eclipse as usual
+		
+		\medskip
+		
+		\item Notice the $Gradle\ Tasks$ view letting you launch tasks from the GUI
+		
+	\end{enumerate}
+
+\end{frame}
+
+\startExercise
+
+\begin{frame}%[c,allowframebreaks]
+	\frametitle{Exercise \currentExercise{} -- Importing Gradle Projects into IntelliJ Idea}
+	
+	Activity:
+	%
+	\medskip
+	%
+	\begin{enumerate}
+		\item From the welcome page: click on $Open\ or\ Import$
+		%
+		\begin{itemize}
+			\item equivalently, from an open Idea Window: $File > Open\ldots$
+		\end{itemize}
+		
+		\medskip
+		
+		\item Select (or just write) the path of your root project, then press $Ok$
+		%
+		\begin{itemize}
+			\item[ie] \texttt{/path/to/\alert{my-app}}
+			\item refresh if you cannot find a directory that should be there
+		\end{itemize}
+		
+		\medskip
+		
+		\item If prompted, import the project as a Gradle project
+		%
+		\begin{itemize}
+			\item \emph{not} an Eclipse one
+		\end{itemize}
+		
+		\medskip
+		
+		\item The Gradle project should now be correctly imported
+		%
+		\begin{itemize}
+			\item its dependencies should be automatically loaded
+		\end{itemize}
+		
+		\medskip
+		
+		\item Use IntelliJ Idea as usual
+		
+		\medskip
+		
+		\item Notice the $Gradle$ view letting you launch tasks from the GUI
+		
+	\end{enumerate}
+	
+\end{frame}
+
+\subsection{Gradlefying JVM Projects}
+
+\startExercise
+
+\begin{frame}[allowframebreaks]
+	\frametitle{Exercise \currentExercise{} -- Gradlefying a JVM project}
+	
+	\begin{block}{Repository}\centering
+		\url{https://gitlab.com/pika-lab/courses/ds/ay2021/lab-1}
+	\end{block}
+
+	\bigskip
+	
+	Activity:
+	%
+	\medskip
+	%
+	\begin{enumerate}
+		\item Have a look to the provided code: it contains the \alert{JEcho} application
+		%
+		\begin{itemize}
+			\item aimed at echoing the standard input using one of \alert{three modalities}
+			%
+			\begin{itemize}
+				\item upper/lower case, or just normal
+			\end{itemize}
+			\item using an external dependency, via local \texttt{.jar} files
+			%
+			\begin{itemize}
+				\item namely, \href{https://commons.apache.org/proper/commons-cli/}{Apache's Commons CLI} tools
+			\end{itemize}
+		\end{itemize}
+		
+		\medskip
+		
+		\item Inspect and understand the code
+		
+		\framebreak
+		
+		\item Gradlefy the project
+		%
+		\begin{itemize}
+			\item generate the \texttt{gradlew(.bat)}, \texttt{build.gradle.kts}, etc. files
+			\item adopt Gradle's canonical directory structure
+			\item delete the \texttt{.jar} dependencies, and declare them instead
+		\end{itemize}
+		
+		\medskip
+		
+		\item Set up Gradle's \texttt{run} task to launch JEcho
+		%
+		\begin{itemize}
+			\item use an optional property named \texttt{`mode'} to let users specify the working modality of JEcho
+			\item \texttt{`lowercase'} or \texttt{`uppercase'} are the admissible values for \texttt{mode}
+		\end{itemize}
+		
+		\medskip
+		
+		\item[!] Solutions which do not pass the tests are not correct
+		%
+		\begin{itemize}
+			\item tests are provided as Bash scripts, for *nix systems
+		\end{itemize}
+	
+		\medskip
+	
+		\item Push your solution on GitLab, \alert{even if incomplete}
+		%
+		\begin{itemize}
+			\item use the \texttt{submissions/\alert{name.surnameN}} branch
+			\item tests are automatically run upon push: consider it a feedback
+		\end{itemize}
+		
+	\end{enumerate}
+	
 \end{frame}
 
 % \section{Containers}
