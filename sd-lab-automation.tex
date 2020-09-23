@@ -322,7 +322,7 @@
             \begin{itemize}
                 \item[eg] \alert{\texttt{my-app}}
             \end{itemize}
-        
+
         	\medskip
 
             \item Create a directory named after the project and move your shell into it
@@ -334,7 +334,7 @@
                 \item[]
                 \item[] (Works on both Unix and Windows)
             \end{itemize}
-        
+
         	\medskip
 
             \item The directory structure shown on the right should have been created
@@ -349,11 +349,11 @@
         \item Prefer \alert{Kotlin} as a build script DSL, and \alert{JUnit} as test framework
 
 		\medskip
-		
+
         \item Inspect the generated files structure \& look for the \texttt{App.java} file
 
 		\medskip
-	
+
         \item Run the application by typing:
         \begin{itemize}
             \item[\$] \texttt{./gradlew run}
@@ -361,9 +361,9 @@
             \item[$>$] \texttt{.$\backslash$gradlew run}
             \item[]
         \end{itemize}
-    	
+
     	\medskip
-    
+
         \item Re-run the application by typing:
         \begin{itemize}
             \item[\$] \texttt{./gradlew \alert{--no-daemon --console=plain} run}
@@ -394,11 +394,11 @@
     Dependencies -- i.e., specific versions of artefacts -- can be added by appending to the \texttt{dependencies} section lines of the form
     %
     \begin{center}
-        \texttt{implementation "<gropuId>}\alert{:}\texttt{<artifactId>}\alert{:}\texttt{<version>"}
+        \texttt{implementation "<groupId>}\alert{:}\texttt{<artifactId>}\alert{:}\texttt{<version>"}
     \end{center}
     %
     \begin{description}
-        \item[\texttt{gropuId}] identifies a group of related artefacts
+        \item[\texttt{groupId}] identifies a group of related artefacts
         \item[\texttt{artifactId}] identifies a specific artefact within the group
         \item[\texttt{version}] identifies a specific version of that artefact
     \end{description}
@@ -408,7 +408,7 @@
     BTW, versions are usually expressed through Semantic Versioning \ccite{semVer}
     %
     \begin{center}
-        \texttt{"<MAJOR>}\alert{.}\texttt{<MINOR>}\alert{:}\texttt{<PATCH>"}
+        \texttt{"<MAJOR>}\alert{.}\texttt{<MINOR>}\alert{.}\texttt{<PATCH>"}
     \end{center}
     %
     \begin{description}
@@ -517,20 +517,20 @@
 	\end{block}
 
 	\framebreak
-	
+
 	Activity:
 	%
 	\medskip
 	%
 	\begin{enumerate}
 		\item Move directory \texttt{/path/to/\alert{my-app}} to \texttt{/path/to/\alert{workspace}/my-app}
-		
+
 		\medskip
-		
+
 		\item Open Eclipse, choosing \texttt{/path/to/\alert{workspace}} as workspace
-		
+
 		\medskip
-		
+
 		\item Click on $File$ and then select $Import$: a wizard should appear
 		%
 		\begin{enumerate}
@@ -538,23 +538,23 @@
 			\item click on $Next$ as may times as possible
 			\item click on $Finish$
 		\end{enumerate}
-	
+
 		\medskip
-		
+
 		\item The Gradle project should now be correctly imported
 		%
 		\begin{itemize}
 			\item its dependencies should be automatically loaded
 		\end{itemize}
-	
+
 		\medskip
-	
+
 		\item Use Eclipse as usual
-		
+
 		\medskip
-		
+
 		\item Notice the $Gradle\ Tasks$ view letting you launch tasks from the GUI
-		
+
 	\end{enumerate}
 
 \end{frame}
@@ -562,7 +562,7 @@
 \startExercise
 
 \begin{frame}[c]{Exercise \currentExercise{} -- Importing Gradle Projects into IntelliJ Idea}
-	
+
 	Activity:
 	%
 	\medskip
@@ -573,42 +573,42 @@
 		\begin{itemize}
 			\item equivalently, from an open Idea Window: $File > Open\ldots$
 		\end{itemize}
-		
+
 		\medskip
-		
+
 		\item Select (or just write) the path of your root project, then press $Ok$
 		%
 		\begin{itemize}
 			\item[ie] \texttt{/path/to/\alert{my-app}}
 			\item refresh if you cannot find a directory that should be there
 		\end{itemize}
-		
+
 		\medskip
-		
+
 		\item If prompted, import the project as a Gradle project
 		%
 		\begin{itemize}
 			\item \emph{not} an Eclipse one
 		\end{itemize}
-		
+
 		\medskip
-		
+
 		\item The Gradle project should now be correctly imported
 		%
 		\begin{itemize}
 			\item its dependencies should be automatically loaded
 		\end{itemize}
-		
+
 		\medskip
-		
+
 		\item Use IntelliJ Idea as usual
-		
+
 		\medskip
-		
+
 		\item Notice the $Gradle$ view letting you launch tasks from the GUI
-		
+
 	\end{enumerate}
-	
+
 \end{frame}
 
 \subsection{Gradlefying JVM Projects}
@@ -616,13 +616,13 @@
 \startExercise
 
 \begin{frame}[c,allowframebreaks]{Exercise \currentExercise{} -- Gradlefying a JVM project}
-	
+
 	\begin{block}{Repository}\centering
 		\url{https://gitlab.com/pika-lab/courses/ds/ay2021/lab-1}
 	\end{block}
 
 	\bigskip
-	
+
 	Activity:
 	%
 	\medskip
@@ -642,13 +642,13 @@
 				\item namely, \href{https://commons.apache.org/proper/commons-cli/}{Apache's Commons CLI} tools
 			\end{itemize}
 		\end{itemize}
-		
+
 		\medskip
-		
+
 		\item Inspect and understand the code
-		
+
 		\framebreak
-		
+
 		\item Gradlefy the project
 		%
 		\begin{itemize}
@@ -656,35 +656,35 @@
 			\item adopt Gradle's canonical directory structure
 			\item delete the \texttt{.jar} dependencies, and declare them instead
 		\end{itemize}
-		
+
 		\medskip
-		
+
 		\item Set up Gradle's \texttt{run} task to launch JEcho
 		%
 		\begin{itemize}
 			\item use an optional property named \texttt{`mode'} to let users specify the working modality of JEcho
 			\item \texttt{`lowercase'} or \texttt{`uppercase'} are the admissible values for \texttt{mode}
 		\end{itemize}
-		
+
 		\medskip
-		
+
 		\item[!] Solutions which do not pass the tests are not correct
 		%
 		\begin{itemize}
 			\item tests are provided as Bash scripts, for *nix systems
 		\end{itemize}
-	
+
 		\medskip
-	
+
 		\item Push your solution on GitLab, \alert{even if incomplete}
 		%
 		\begin{itemize}
 			\item use the \texttt{submissions/\alert{name.surnameN}} branch
 			\item tests are automatically run upon push: consider it a feedback
 		\end{itemize}
-		
+
 	\end{enumerate}
-	
+
 \end{frame}
 
 % \section{Containers}
