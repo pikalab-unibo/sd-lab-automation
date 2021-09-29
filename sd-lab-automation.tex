@@ -46,7 +46,7 @@
 \frametitle{Motivation}
 
     \begin{itemize}
-        \item Real world (distributed) applications are made up of several \alert{components} which need to be \alert{deployed} on one or more machines
+        \item real world (distributed) applications are made up of several \alert{components} which need to be \alert{deployed} on one or more machines
         %
         \begin{itemize}
             \item possibly in an orderly fashion
@@ -54,7 +54,7 @@
 
         \bigskip
 
-        \item Furthermore, only rarely people write software \alert{from scratch}
+        \item furthermore, only rarely people write software \alert{from scratch}
         %
         \begin{itemize}
             \item more commonly, software \alert{depends} from other software
@@ -72,7 +72,7 @@
 
         \framebreak
 
-        \item In projects/exercises, you may need to write, compile, \alert{deploy}, \& start several processes in a given \alert{order}, possibly multiple \alert{times}
+        \item in projects/exercises, you may need to write, compile, \alert{deploy}, \& start several processes in a given \alert{order}, possibly multiple \alert{times}
         %
         \begin{itemize}
             \item furthermore we may will to exploit \alert{open-source libraries} from the Internet
@@ -81,7 +81,7 @@
         \bigskip
 
 
-        \item We will extensively leverage \alert{Build Automation} in our activities to automate most low level operations
+        \item we will extensively leverage \alert{Build Automation} in our activities to automate most low level operations
         %
         \begin{itemize}
             \item in an IDE-independent way
@@ -135,23 +135,23 @@
     %
     \begin{multicols}{2}
         \begin{itemize}
-            \item Dependencies management
+            \item dependencies management
 
-            \item \alert{Compilation}
+            \item \alert{compilation}
 
-            \item Code generation
+            \item code generation
 
-            \item Testing
+            \item testing
 
-            \item Execution
+            \item execution
 
-            \item Artefact generation
+            \item artefact generation
             %
             \begin{itemize}
                 \item[eg] \texttt{.jar} files
             \end{itemize}
 
-            \item Release publication/upload
+            \item release publication/upload
         \end{itemize}
     \end{multicols}
     %
@@ -161,13 +161,13 @@
 
     \begin{itemize}
 
-        \item Remember the time spent configuring someone else's Eclipse project?
+        \item remember the time spent configuring someone else's Eclipse project?
         %
         \begin{itemize}
             \item we are targeting that problem
         \end{itemize}
 
-        \item[!] Plus, build automation systems are very handy when combined with Containers, e.g. for Continuous Integration
+        \item[!] plus, build automation systems are very handy when combined with Containers, e.g. for Continuous Integration
 
     \end{itemize}
 
@@ -176,7 +176,7 @@
 
 \subsection{Gradle}
 
-\begin{frame}{Build Automation systems for the JVM}
+\begin{frame}{Why Build Automation Systems}
     We will leverage \alert{Gradle} as a build automation system for JVM-based application in order to automate your exercises/projects:
     %
     \begin{itemize}
@@ -184,8 +184,6 @@
         \item compilation
         \item launch by command line
     \end{itemize}
-
-    \vfill
 
     (Of course, alternatives exist for other platforms)
 
@@ -198,84 +196,15 @@
     \end{block}
 \end{frame}
 
-\begin{frame}{Build Automation systems for other platforms}
-
-    \begin{table}[H!]
-        \centering
-        \begin{tabular}{c|c|c}
-            \textbf{Platform} & \textbf{Build Automation System} & \textbf{Package Repository}
-            \\\hline\hline
-            JVM               & Gradle / Maven                   & \href{https://search.maven.org/}{MCR}
-            \\
-            Python            & pip + setuptools + virtualenv\footnotemark    & \href{https://pypi.org/}{Pypi}
-            \\
-            .NET              & dotnet                           & \href{https://www.nuget.org/}{NuGet}
-            \\
-            JavaScript        & npm                              & \href{https://www.npmjs.com/}{NPM}
-        \end{tabular}
-    \end{table}
-
-    \footnotetext{cf. \uurl{https://stackoverflow.com/questions/41573587/what-is-the-difference-between-venv-pyvenv-pyenv-virtualenv-virtualenvwrappe}}
-
-    \vfill
-
-    \begin{block}{From now on}
-        \begin{itemize}
-            \item projects targetting platform $X$ \emph{should} be submitted with the most adequate build automation facilities for platform $X$
-        \end{itemize}
-    \end{block}
-\end{frame}
-
-\begin{frame}[allowframebreaks]
-\frametitle{Gradle in a Nutshell}
+\begin{frame}[c,allowframebreaks]{Gradle}
 
     Gradle is our build automation of choice
-    %
-    \bigskip
-    %
+        %
     \begin{itemize}
-        \item It assumes each project to adhere to a well defined \alert{directory structure}
-        %
-        \begin{itemize}
-            \item possibly involving several \alert{sub-projects} (a.k.a. \alert{modules})\ldots
-            \item \ldots in this case we distinguish among the \alert{root} project and many \alert{sub-}projects
-            %
-            \begin{itemize}
-                \item we may refer to both as \emph{projects}, in general
-            \end{itemize}
-        \end{itemize}
+        \item it assumes each project to adhere to a well defined \alert{directory structure}
 
-        \bigskip
 
-        \item Projects and sub-projects are \alert{computational units}
-        %
-        \begin{itemize}
-            \item[ie] containers of code which are compiled, tested, and packed \alert{as wholes}
-            \item it is quite common for (sub-)projects to be \alert{inter-dependent}
-        \end{itemize}
-
-        \framebreak
-
-        \item The \alert{root} project is special, as its directory contains:
-        %
-        \begin{itemize}
-            \item a \alert{\texttt{gradlew}} script (\texttt{gradlew.bat}, on Windows systems)
-            %
-            \begin{itemize}
-                \item it is called the \alert{Gradle wrapper}
-                \item it's your entry point manage either root project or any sub-projects
-            \end{itemize}
-
-            \item a \alert{\texttt{settings.gradle(.kts)}} script
-            %
-            \begin{itemize}
-                \item declaring the root project's and sub-projects' names
-            \end{itemize}
-        \end{itemize}
-
-        \bigskip
-
-        \item Each project should contain a \alert{\texttt{build.gradle(.kts)}} file
+        \item a \alert{\texttt{gradlew}} (or \texttt{gradlew.bat}, on Windows systems) script is assumed to be present within the project root directory
         %
         \begin{itemize}
             \item either explicitly or implicitly declaring the \alert{properties} of that project
@@ -291,9 +220,7 @@
             \end{itemize}
         \end{itemize}
 
-        \framebreak
-
-        \item Notably, dependencies are just \alert{declared} into a \alert{\texttt{build.gradle(.kts)}} file, along with their versions
+        \item dependencies are just \alert{declared} into a \alert{\texttt{build.gradle(.kts)}} file, along with their versions
         %
         \begin{itemize}
             \item no \texttt{.jar} file must/should be provided, in the general case
@@ -305,24 +232,10 @@
             \item package repositories URL must be declared as well!
         \end{itemize}
 
-        \bigskip
+\framebreak
 
-        \item Each project's source code is stored into the \alert{\texttt{src}} directory, and partitioned\ldots
-        %
-        \begin{itemize}
-            \item \ldots by source set (commonly, \alert{\texttt{main}} and \alert{\texttt{test}})
-            %
-            \begin{itemize}
-                \item \ldots and by language (commonly, \alert{\texttt{java}}, \texttt{kotlin}, \texttt{scala}, etc.)
-                \item[!] \alert{\texttt{resources}} are considered as yet another sort of language
-            \end{itemize}
-            \item main code is packed and deployed, test code is not
-        \end{itemize}
-
-        \framebreak
-
-        \item Under such hypotheses, developers can execute several tasks on the project by calling the \texttt{gradlew} script as follows:
-        %
+\begin{itemize}
+        \item under such hypotheses, developers can execute several tasks on the project by calling the \texttt{gradlew} script as follows:
         \begin{itemize}
             \item[\$] \texttt{\alert{./}gradlew \alert{<task>}} \quad (on Unix)
             \item[] or
@@ -333,10 +246,7 @@
             \end{itemize}
         \end{itemize}
 
-        \bigskip
-
-        \item If Gradle is properly installed on your system, you don't need the \texttt{gradlew} script:
-        %
+        \item if Gradle is properly installed on your system, you don't need the \texttt{gradlew} script:
         \begin{itemize}
             \item[\$] \texttt{gradle \alert{<task>}} \quad (on both Unix and Windows)
             %
@@ -347,15 +257,11 @@
 
         \bigskip
 
-        \item A sub-project's specific task can be launched by:
-        %
-        \begin{itemize}
-            \item[\$] \texttt{./gradlew \alert{<sub-project>}:\alert{<task>}}
-        \end{itemize}
+\framebreak
 
-        \framebreak
+    \begin{itemize}
 
-        \item The set of available tasks (for JVM apps) includes:
+        \item the set of available tasks (for JVM apps) includes:
         %
         \begin{description}
             \item[\texttt{assemble}] | compiles the projects
@@ -367,7 +273,7 @@
 
         \bigskip
 
-        \item Dependencies between are as follows:
+        \item dependencies between are as follows:
         %
         \begin{itemize}
             \item \texttt{run} $\rightarrow$ \texttt{build} $\rightarrow$ \texttt{check} $\rightarrow$ \texttt{assemble}
@@ -386,8 +292,7 @@
 
 \subsubsection{Canonical Directory Structures}
 
-\begin{frame}[fragile]
-\frametitle{Canonical Directory Structure -- Flat Project}
+\begin{frame}[c,fragile]{Canonical Directory Structure}
 
 \begin{Verbatim}[fontsize=\small,commandchars=\\\{\}]
 \textcolor{blue}{my-project/}\dhint{The root project directory, named after it}
@@ -411,59 +316,71 @@
 
 \end{frame}
 
-\begin{frame}[fragile]
-    \frametitle{Canonical Directory Structure -- Multi-Project}
-
-\begin{Verbatim}[fontsize=\tiny,commandchars=\\\{\}]
-\textcolor{blue}{my-project/}\dhint{The \emph{root project} directory, named after it}
-├── \textcolor{green}{gradlew}\dhint{The \emph{Gradle Wrapper} script, for Unix}
-├── \textcolor{green}{gradlew.bat}\dhint{The \emph{Gradle Wrapper} script, for Windows}
-├── \textcolor{olive}{build.gradle[.kts]}\dhint{Configuration of the \emph{root project}}
-├?┬ \textcolor{cyan}{src/}\dhint{The \emph{source} folder: contains the \emph{root project}'s code}
-│  ├─┬ main/\dhint{The `main' \emph{source set} of the \emph{root project}}
-│  │  └─┬── java/\dhint{Java source files of the \emph{root project}}
-│  │      ├?─ kotlin/\dhint{Kotlin source files of the \emph{root project}}
-│  │      └?─ \textcolor{orange}{resources/}\dhint{Resource files for the \emph{root project}}
-│  └?┬ test/\dhint{The `test' \emph{source set} of the \emph{root project}}
-│     └─┬?─ <other lang>/
-│         └?─ \textcolor{orange}{resources/}
-├─┬ \textcolor{blue}{sub-project-1/}\dhint{Root of the \emph{sub-project-1}}
-│  ├── \textcolor{olive}{build.gradle[.kts]}\dhint{Configuration of \emph{sub-project-1}}
-│  ├─┬ \textcolor{cyan}{src/}\dhint{\emph{Source} folder of \emph{sub-project-1}}
-│  │  └── \ldots
-│  └?─ \textcolor{gold}{gradle.properties}\dhint{A \href{https://en.wikipedia.org/wiki/.properties}{\emph{.properties} file} for default properties of \emph{sub-project-1}}
-├─┬ \textcolor{blue}{sub-project-2/}\dhint{Root of the \emph{sub-project-2}}
-│  ├── \textcolor{olive}{build.gradle[.kts]}\dhint{Configuration of \emph{sub-project-2}}
-│  ├─┬ \textcolor{cyan}{src/}\dhint{\emph{Source} folder of \emph{sub-project-2}}
-│  │  └── \ldots
-│  └?─ \textcolor{gold}{gradle.properties}\dhint{A \href{https://en.wikipedia.org/wiki/.properties}{\emph{.properties} file} for default properties of \emph{sub-project-2}}
-├?─ \textcolor{gold}{gradle.properties}\dhint{A \href{https://en.wikipedia.org/wiki/.properties}{\emph{.properties} file} for default properties}
-├── \textcolor{olive}{settings.gradle[.kts]}\dhint{Some minor project settings, in Gradle lang}
-├── \textcolor{red}{gradle/}\dhint{Contains libraries for the Gradle Wrapper}
-├── \textcolor{red}{.gradle/}\dhint{Dynamically generated by the Gradle Wrapper}
-└── \textcolor{red}{build/}\dhint{Where compiled \emph{.class} and \emph{.jar} files are put}
-\end{Verbatim}
-\end{frame}
+\subsubsection{Gradle Tasks \& Dependencies}
 
 \begin{frame}[allowframebreaks]
-\frametitle{Gradle Files}
+\frametitle{Gradle Tasks \& Dependencies -- Try by Yourself}
 
-\begin{block}{Gradle files you may need to read/edit}
-    \begin{description}
-        \item[\texttt{settings.gradle}] $\rightarrow$ Groovy syntax
-        %
+    \columsHH{
+        \begin{enumerate}
+            \item choose a project name
+            %
+            \begin{itemize}
+                \item[eg] \alert{\texttt{my-app}}
+            \end{itemize}
+
+        	\medskip
+
+            \item create a directory named after the project and move your shell into it
+            %
+            \begin{itemize}
+                \item[\$] \texttt{mkdir \alert{my-app}}
+                \item[\$] \texttt{cd my-app}
+                \item[\$] \texttt{gradle init --type java-application}
+                \item[]
+                \item[] (works on both *nix and Windows)
+            \end{itemize}
+
+        	\medskip
+
+            \item the directory structure shown on the right should have been created
+        \end{enumerate}
+    }{
+        \includegraphics[width=\linewidth]{res/img/gradle_tree.png}
+    }
+
+    \framebreak
+
+    \begin{enumerate}\setcounter{enumi}{3}
+        \item prefer \alert{Kotlin} as a build script DSL, and \alert{JUnit} as test framework
+
+		\medskip
+
+        \item inspect the generated files structure \& look for the \texttt{App.java} file
+
+		\medskip
+
+        \item run the application by typing:
         \begin{itemize}
             \item Kotlin syntax $\rightarrow$ add the \alert{\texttt{.kts}} extension
         \end{itemize}
 
-        \item[\texttt{build.gradle}] $\rightarrow$ Groovy syntax
-        %
+    	\medskip
+
+        \item re-run the application by typing:
         \begin{itemize}
             \item Kotlin syntax $\rightarrow$ add the \alert{\texttt{.kts}} extension
         \end{itemize}
 
-        \item[\texttt{gradle.properties}] $\rightarrow$ Java's \texttt{.properties}\footnote{cf. \url{https://en.wikipedia.org/wiki/.properties}} syntax
-        %
+        \medskip
+
+        \item[?] can you spot the differences?
+    \end{enumerate}
+
+    \framebreak
+
+    \begin{enumerate}\setcounter{enumi}{8}
+        \item now look at the \texttt{\alert{build.gradle.kts}} file
         \begin{itemize}
             \item essentially, \texttt{\textit{key}\alert{=}value} entries, one per line
         \end{itemize}
@@ -501,17 +418,16 @@ captionpos=t
 
 \end{frame}
 
-\begin{frame}[allowframebreaks]
-    \frametitle{Handling dependencies}
+\begin{frame}[c,allowframebreaks]{About Dependencies}
 
     Dependencies -- i.e., specific versions of artefacts -- can be added by appending to the \texttt{dependencies} section lines of the form
     %
     \begin{center}
-        \texttt{implementation\textit{<Scope>}("\textit{<gropuId>}\alert{:}\textit{<artifactId>}\alert{:}\textit{<version>"}})
+        \texttt{implementation "<groupId>}\alert{:}\texttt{<artifactId>}\alert{:}\texttt{<version>"}
     \end{center}
     %
-    \begin{description}\small
-        \item[\texttt{gropuId}] identifies a group of related artefacts
+    \begin{description}
+        \item[\texttt{groupId}] identifies a group of related artefacts
         \item[\texttt{artifactId}] identifies a specific artefact within the group
         \item[\texttt{version}] identifies a specific version of that artefact
         \item[\texttt{Scope}] is \alert{\texttt{Test}} for test dependencies, or the empty string otherwise
@@ -522,7 +438,7 @@ captionpos=t
     BTW, versions are usually expressed through Semantic Versioning \ccite{semVer}
     %
     \begin{center}
-        \texttt{"\textit{<MAJOR>}\alert{.}\textit{<MINOR>}\alert{.}\textit{<PATCH>"}}
+        \texttt{"<MAJOR>}\alert{.}\texttt{<MINOR>}\alert{.}\texttt{<PATCH>"}
     \end{center}
     %
     \begin{description}\small
@@ -545,46 +461,14 @@ captionpos=t
 
 \subsubsection{Authoring Tasks}
 
-\begin{frame}[allowframebreaks]
-\frametitle{Editing an existing task}
-    \lstinputlisting[
-        language=Kotlin,
-        caption={General way of editing a default task},
-        captionpos=b
-    ]{src/edit-default-tasks.kt}
+\begin{frame}[c,allowframebreaks]{Gradle Properties -- Try it your self}
+    \begin{enumerate}
 
-    \lstinputlisting[
-        language=Kotlin,
-        caption={Example: editing the \texttt{test} and \texttt{compileJava} tasks},
-        captionpos=b
-    ]{src/edit-default-tasks-example.kt}
+        \item try editing the \texttt{App.java} program in such a way it accepts some arguments, like for instance
+        %
+        \lstinputlisting[language=Java]{./res/src/App.java}
 
-    \framebreak
-
-    \lstinputlisting[
-        language=Kotlin,
-        caption={General way of editing any task},
-        captionpos=b
-    ]{src/edit-custom-tasks.kt}
-
-    \lstinputlisting[
-        basicstyle=\ttfamily\tiny,
-        language=Kotlin,
-        caption={General way of editing any task},
-        captionpos=b
-    ]{src/edit-custom-tasks-example.kt}
-
-\end{frame}
-
-\begin{frame}[allowframebreaks]
-    \frametitle{Creating a new task}
-    \lstinputlisting[
-        language=Kotlin,
-        caption={General way of creating a custom task},
-        captionpos=t
-    ]{src/create-custom-tasks.kt}
-
-    \begin{block}{About groups and descriptions}
+        \item try running it with
         \begin{itemize}
             \item The are basic properties following documentations purposes
             \item They aid developers willing to explore tasks via:
@@ -619,52 +503,42 @@ captionpos=t
 \frametitle{Passing arguments to Gradle tasks}
 
     \begin{itemize}
-        \item Gradle tasks accept arguments in the form of \alert{properties}
-        \item A property is a \alert{key-value} pair
-        \item The behaviour of tasks can be parametrised via properties
+        \item[!] how to pass arguments to a Gradle task?
     \end{itemize}
 
     \framebreak
 
-    \lstinputlisting[
-        basicstyle=\ttfamily\tiny,
-        language=Kotlin,
-        caption={General way of reading a property in a Gradle script},
-        captionpos=b
-    ]{src/consuming-properties.kt}
-
-    \framebreak
-
-    Three ways to ``pass'' a property to Gradle:
-
-    \begin{block}{Pass key-value pairs by command line to \texttt{gradlew}}
-        \centering
-        \alert{\$} \texttt{./gradlew \textit{<task>} -P}\alert{\texttt{key1}}\texttt{=}\alert{\texttt{value1}} \texttt{-P}\alert{\texttt{key2}}\texttt{=}\alert{\texttt{value2}} \texttt{...}
-    \end{block}
-
-    \begin{block}{Append lines a \texttt{gradle.properties} file}
-        \alert{\texttt{key1}}\texttt{=}\alert{\texttt{value1}}\\
-        \alert{\texttt{key2}}\texttt{=}\alert{\texttt{value2}}\\
-        \texttt{...}
-    \end{block}
-
-    \begin{block}{Define an environment variable with a particular name}
-        \centering
-        \alert{\$} \texttt{\textit{export} ORG\_GRADLE\_PROJECT\_\alert{key}=\alert{value}}
+    \begin{enumerate}\setcounter{enumi}{2}
+        \item let's redefine the \texttt{run} task by \alert{adding} the following section to the \texttt{build.gradle.kts} file: \hint{help for backticks \href{https://stefanonegro.it/2013/04/15/backtick-e-tilde-con-una-tastiera-italiana}{here}}
         %
+        \lstinputlisting[language=Java]{./res/src/run.task.kts}
+
+        \item try running it again, with:
         \begin{itemize}
             \item[!] before launching \texttt{gradle} or \texttt{gradlew}
         \end{itemize}
-    \end{block}
+    \end{enumerate}
+    %
+    \begin{itemize}
+        \item[!] how to set a Gradle Property? There are several ways, like, for instance:
+    \end{itemize}
+    %
+    \columsHH{
+        \begin{block}{Append the following lines to \texttt{gradle.properties} file}
+            \alert{\texttt{key1}}\texttt{=}\alert{\texttt{value1}}\\
+            \alert{\texttt{key2}}\texttt{=}\alert{\texttt{value2}}\\
+            \texttt{...}
+        \end{block}
+    }{
+        \begin{block}{Passing properties by command line to \texttt{gradlew run}}
+            \centering
+            \alert{\$} \texttt{./gradlew run -P}\alert{\texttt{key1}}\texttt{=}\alert{\texttt{value1}} \texttt{-P}\alert{\texttt{key2}}\texttt{=}\alert{\texttt{value2}} \texttt{...}
+        \end{block}
+    }
 
-    \framebreak
-
-    \lstinputlisting[
-        basicstyle=\ttfamily\tiny,
-        language=Kotlin,
-        caption={Example of reading custom properties in a Gradle script},
-        captionpos=b
-    ]{src/run.task.kts}
+    \begin{enumerate}\setcounter{enumi}{4}
+        \item try making the \texttt{App.java} program print \texttt{"Hello, <your name>!"}
+    \end{enumerate}
 
 \end{frame}
 
@@ -674,12 +548,11 @@ captionpos=t
 
 \startExercise
 
-\begin{frame}[c,allowframebreaks]
-	\frametitle{Exercise \currentExercise{} -- Importing Gradle Projects into Eclipse}
+\begin{frame}[c,allowframebreaks]{Exercise \currentExercise{} -- Importing Gradle Projects into Eclipse}
 
 	\begin{block}{\textbf{Takeway} -- Preferred setup for Eclipse}
 		\begin{itemize}
-			\item Put your Gradle root project inside a directory, inside the \alert{workspace}
+			\item put your Gradle root project inside a directory, inside the \alert{workspace}
 			\item[eg] \texttt{/path/to/workspace}
 			%
 			\begin{itemize}
@@ -699,15 +572,15 @@ captionpos=t
 	\medskip
 	%
 	\begin{enumerate}
-		\item Move directory \texttt{/path/to/\alert{my-app}} to \texttt{/path/to/\alert{workspace}/my-app}
+		\item move directory \texttt{/path/to/\alert{my-app}} to \texttt{/path/to/\alert{workspace}/my-app}
 
 		\medskip
 
-		\item Open Eclipse, choosing \texttt{/path/to/\alert{workspace}} as workspace
+		\item open Eclipse, choosing \texttt{/path/to/\alert{workspace}} as workspace
 
 		\medskip
 
-		\item Click on $File$ and then select $Import$: a wizard should appear
+		\item click on $File$ and then select $Import$: a wizard should appear
 		%
 		\begin{enumerate}
 			\item select $Gradle / Exsting\ Gradle\ Project$
@@ -717,7 +590,7 @@ captionpos=t
 
 		\medskip
 
-		\item The Gradle project should now be correctly imported
+		\item the Gradle project should now be correctly imported
 		%
 		\begin{itemize}
 			\item its dependencies should be automatically loaded
@@ -725,11 +598,11 @@ captionpos=t
 
 		\medskip
 
-		\item Use Eclipse as usual
+		\item use Eclipse as usual
 
 		\medskip
 
-		\item Notice the $Gradle\ Tasks$ view letting you launch tasks from the GUI
+		\item notice the $Gradle\ Tasks$ view letting you launch tasks from the GUI
 
 	\end{enumerate}
 
@@ -737,15 +610,14 @@ captionpos=t
 
 \startExercise
 
-\begin{frame}%[c,allowframebreaks]
-	\frametitle{Exercise \currentExercise{} -- Importing Gradle Projects into IntelliJ Idea}
+\begin{frame}[c]{Exercise \currentExercise{} -- Importing Gradle Projects into IntelliJ Idea}
 
 	Activity:
 	%
 	\medskip
 	%
 	\begin{enumerate}
-		\item From the welcome page: click on $Open\ or\ Import$
+		\item from the welcome page: click on $Open\ or\ Import$
 		%
 		\begin{itemize}
 			\item equivalently, from an open Idea Window: $File > Open\ldots$
@@ -753,7 +625,7 @@ captionpos=t
 
 		\medskip
 
-		\item Select (or just write) the path of your root project, then press $Ok$
+		\item select (or just write) the path of your root project, then press $Ok$
 		%
 		\begin{itemize}
 			\item[ie] \texttt{/path/to/\alert{my-app}}
@@ -762,7 +634,7 @@ captionpos=t
 
 		\medskip
 
-		\item If prompted, import the project as a Gradle project
+		\item if prompted, import the project as a Gradle project
 		%
 		\begin{itemize}
 			\item \emph{not} an Eclipse one
@@ -770,7 +642,7 @@ captionpos=t
 
 		\medskip
 
-		\item The Gradle project should now be correctly imported
+		\item the Gradle project should now be correctly imported
 		%
 		\begin{itemize}
 			\item its dependencies should be automatically loaded
@@ -778,11 +650,11 @@ captionpos=t
 
 		\medskip
 
-		\item Use IntelliJ Idea as usual
+		\item use IntelliJ Idea as usual
 
 		\medskip
 
-		\item Notice the $Gradle$ view letting you launch tasks from the GUI
+		\item notice the $Gradle$ view letting you launch tasks from the GUI
 
 	\end{enumerate}
 
@@ -792,8 +664,7 @@ captionpos=t
 
 \startExercise
 
-\begin{frame}[allowframebreaks]
-	\frametitle{Exercise \currentExercise{} -- Gradlefying a JVM project}
+\begin{frame}[c,allowframebreaks]{Exercise \currentExercise{} -- Gradlefying a JVM project}
 
 	\begin{block}{Repository}\centering
 		\url{https://gitlab.com/pika-lab/courses/ds/ay2021/lab-1}
@@ -806,7 +677,7 @@ captionpos=t
 	\medskip
 	%
 	\begin{enumerate}
-		\item Have a look to the provided code: it contains the \alert{JEcho} application
+		\item have a look to the provided code: it contains the \alert{JEcho} application
 		%
 		\begin{itemize}
 			\item aimed at echoing the standard input using one of \alert{three modalities}
@@ -823,7 +694,7 @@ captionpos=t
 
 		\medskip
 
-		\item Inspect and understand the code
+		\item inspect and understand the code
 
 		\framebreak
 
@@ -837,7 +708,7 @@ captionpos=t
 
 		\medskip
 
-		\item Set up Gradle's \texttt{run} task to launch JEcho
+		\item set up Gradle's \texttt{run} task to launch JEcho
 		%
 		\begin{itemize}
 			\item use an optional property named \texttt{`mode'} to let users specify the working modality of JEcho
@@ -846,7 +717,7 @@ captionpos=t
 
 		\medskip
 
-		\item[!] Solutions which do not pass the tests are not correct
+		\item[!] solutions which do not pass the tests are not correct
 		%
 		\begin{itemize}
 			\item tests are provided as Bash scripts, for *nix systems
@@ -854,7 +725,7 @@ captionpos=t
 
 		\medskip
 
-		\item Push your solution on GitLab, \alert{even if incomplete}
+		\item push your solution on GitLab, \alert{even if incomplete}
 		%
 		\begin{itemize}
 			\item use the \texttt{submissions/\alert{name.surnameN}} branch
@@ -1387,11 +1258,11 @@ captionpos=t
 
 \setbeamertemplate{page number in head/foot}{}
 %\\\\\\\\\\\\\\\\\\\\\
-\begin{frame}[t,allowframebreaks,noframenumbering]\frametitle{\refname}
-    % \begin{frame}[c]\frametitle{\refname}
+%\begin{frame}[t,allowframebreaks,noframenumbering]{\refname}
+\begin{frame}[c]{\refname}
     %	\footnotesize
     %	\scriptsize
-    \tiny
+    %	\tiny
     \bibliographystyle{plain}
     \bibliography{sd-lab-automation}
 \end{frame}
