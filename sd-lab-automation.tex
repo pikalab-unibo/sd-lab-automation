@@ -30,6 +30,15 @@
 \end{frame}
 }
 
+\AtBeginSubsection[]
+{
+    \begin{frame}[c]\frametitle{Next in Line\ldots}
+        %    \begin{multicols}{2}
+        \tableofcontents[sectionstyle=show/shaded, subsectionstyle=show/hide, subsubsectionstyle=show/hide]
+        %    \end{multicols}
+    \end{frame}
+}
+
 \begin{document}
 
 \maketitle
@@ -543,7 +552,7 @@ captionpos=t
 
 \end{frame}
 
-\subsubsection{Authoring Tasks}
+\subsection{Authoring Tasks}
 
 \begin{frame}[allowframebreaks]
 \frametitle{Editing an existing task}
@@ -668,14 +677,41 @@ captionpos=t
 
 \end{frame}
 
-\section{Exercises}
+\subsection{Running Gradle}
+
+\begin{frame}
+    \framebreak{About running Gradle}
+
+    \begin{block}{Gradle daemon}
+        \begin{itemize}
+            \item The first time Gradle is launched it starts a daemon
+            %
+            \begin{itemize}
+                \item to speed subsequent runs up
+            \end{itemize}
+            \item The daemon may survive the single run
+            %
+            \begin{itemize}
+                \item provoking issues in some cases
+            \end{itemize}
+            \item To prevent that, use the \alert{\texttt{--no-daemon}} argument
+        \end{itemize}
+    \end{block}
+
+    \begin{block}{Gradle logs}
+        \begin{itemize}
+            \item Gradle logs a number of useful information\ldots
+            \item \ldots and erases most of them on the fly
+            \item Use the \alert{\texttt{--console=plain}} argument to avoid erasure
+            \item Use the \alert{\texttt{-q}} argument to avoid logs
+        \end{itemize}
+    \end{block}
+\end{frame}
 
 \subsection{Importing Gradle Projects into IDE}
 
-\startExercise
-
 \begin{frame}[c,allowframebreaks]
-	\frametitle{Exercise \currentExercise{} -- Importing Gradle Projects into Eclipse}
+	\frametitle{How to import Gradle Projects into Eclipse}
 
 	\begin{block}{\textbf{Takeway} -- Preferred setup for Eclipse}
 		\begin{itemize}
@@ -694,12 +730,12 @@ captionpos=t
 
 	\framebreak
 
-	Activity:
-	%
-	\medskip
-	%
 	\begin{enumerate}
 		\item Move directory \texttt{/path/to/\alert{my-app}} to \texttt{/path/to/\alert{workspace}/my-app}
+        %
+        \begin{itemize}
+            \item or use \texttt{/path/\alert{to/}} as the workspace
+        \end{itemize}
 
 		\medskip
 
@@ -738,12 +774,8 @@ captionpos=t
 \startExercise
 
 \begin{frame}%[c,allowframebreaks]
-	\frametitle{Exercise \currentExercise{} -- Importing Gradle Projects into IntelliJ Idea}
+	\frametitle{Import Gradle Projects into IntelliJ Idea}
 
-	Activity:
-	%
-	\medskip
-	%
 	\begin{enumerate}
 		\item From the welcome page: click on $Open\ or\ Import$
 		%
@@ -788,6 +820,8 @@ captionpos=t
 
 \end{frame}
 
+\section{Exercises}
+
 \subsection{Gradlefying JVM Projects}
 
 \startExercise
@@ -796,7 +830,7 @@ captionpos=t
 	\frametitle{Exercise \currentExercise{} -- Gradlefying a JVM project}
 
 	\begin{block}{Repository}\centering
-		\url{https://gitlab.com/pika-lab/courses/ds/ay2021/lab-1}
+		\url{https://gitlab.com/pika-lab/courses/ds/ay2122/lab-1}
 	\end{block}
 
 	\bigskip
