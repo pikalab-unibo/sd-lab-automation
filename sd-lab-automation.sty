@@ -1,0 +1,42 @@
+\usepackage{fancyvrb}
+\usepackage{newunicodechar}
+\usepackage{xcolor}
+
+% ISE numbering
+\labN{1}
+
+\AtBeginSection[]
+{
+    \begin{frame}[c,noframenumbering]\frametitle{Next in Line\ldots}
+        %    \begin{multicols}{2}
+            \tableofcontents[sectionstyle=show/shaded, subsectionstyle=show/hide, subsubsectionstyle=hide/hide]
+            %    \end{multicols}
+    \end{frame}
+}
+
+\AtBeginSubsection[]
+{
+    \begin{frame}[c,noframenumbering]\frametitle{Next in Line\ldots}
+        %    \begin{multicols}{2}
+            \tableofcontents[sectionstyle=show/shaded, subsectionstyle=show/hide, subsubsectionstyle=hide/hide]
+            %    \end{multicols}
+    \end{frame}
+}
+
+\definecolor{gold}{rgb}{0.9608,0.902,0.25882}
+
+\makeatletter
+\verbatim@font
+\newsavebox\v@sp
+\sbox{\v@sp}{\ }
+\newlength{\v@spwd}
+\setlength{\v@spwd}{\wd\v@sp}
+\newunicodechar{└}{\mbox{\kern0.5\v@spwd\vrule height 2ex depth -1ex width 0.2ex\kern-0.2ex\rule[1ex]{0.5\v@spwd}{0.2ex}}}
+\newunicodechar{─}{\rule[1ex]{1\v@spwd}{0.2ex}}
+\newunicodechar{┬}{\rule[1ex]{0.5\v@spwd}{0.2ex}\vrule height 1ex
+    depth 0.5ex width0.2ex\kern-0.2ex\rule[1ex]{0.5\v@spwd}{0.2ex}}
+\newunicodechar{├}{\mbox{\kern0.5\v@spwd\vrule height 2ex depth 0.5ex width 0.2ex\kern-0.2ex\rule[1ex]{0.5\v@spwd}{0.2ex}}}
+\newunicodechar{│}{\mbox{\kern0.5\v@spwd\vrule height 2ex depth 0.5ex width
+        0.2ex\kern-0.2ex \kern0.5\v@spwd}}
+\makeatother
+\normalfont
