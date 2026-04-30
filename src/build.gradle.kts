@@ -16,7 +16,7 @@ application {
 
 dependencies {
     // Test dependencies for running tests
-    testImplementation("org.junit.jupiter:junit-jupiter:5.7.2")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.14.4")
 
     // Main dependencies for the application
     implementation("com.google.guava:guava:30.1.1-jre")
